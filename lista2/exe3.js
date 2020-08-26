@@ -4,7 +4,7 @@ function main(){
     do{
         var option = Number(prompt(`Digite conforme o desejado: 
         [1]. Cadastrar novo habitante 
-        [2]. req2 
+        [2]. Média das idades das pessoas com olhos castanhos e altura maior que 1.60 
         [3]. req3
         [4]. req4
         [5]. req5 
@@ -14,7 +14,7 @@ function main(){
                 register(population)
                 break
             case 2:
-                request2(population)
+                mdAge(population)
                 break
             case 3:
                 request3(population)
@@ -38,7 +38,21 @@ function register(arr){
     person.gen = prompt("Gênero: ").toUpperCase()
     person.h = Number(prompt("Altura: "))
     person.age = Number(prompt("Idade: "))
-    person.eyes = prompt("Cor dos Olhos: A - Azul; V - Verde; C - Castanho")
+    person.eyes = prompt("Cor dos Olhos: A - Azul; V - Verde; C - Castanho").toUpperCase()
     arr.push(person)
     console.log(arr)
+}
+function mdAge(arr){
+    var total = 0
+    var cont = 0
+    for(var i = 0; i < arr.length; i++){
+        if((arr[i].eyes = "C") && (arr[i].h > 1.60)){
+            total += arr[i].age
+            cont++
+        }
+    }
+    if(cont > 0)
+        alert(`A média das idades é de ${(total/cont).toFixed(2)}`)
+    else
+        alert("Não existem pessoas assim cadastradas!")
 }
