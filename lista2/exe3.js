@@ -5,9 +5,9 @@ function main(){
         var option = Number(prompt(`Digite conforme o desejado: 
         [1]. Cadastrar novo habitante 
         [2]. Média das idades das pessoas com olhos castanhos e altura maior que 1.60 
-        [3]. req3
-        [4]. req4
-        [5]. req5 
+        [3]. Maior idade dentre os habitantes
+        [4]. Quantidade de indivíduos do sexo feminino com idade entre 20 e 45 anos ou que tenham olhos verdes e altura inferior a 1.70m
+        [5]. Percentual de homens
         [6]. Sair do programa`))
         switch(option){
             case 1:
@@ -17,13 +17,13 @@ function main(){
                 mdAge(population)
                 break
             case 3:
-                request3(population)
+                olderAge(population)
                 break
             case 4:
-                request4(population)
+                item4(population)
                 break
             case 5:
-                request5(population)
+                percentMan(population)
                 break
             case 6:
                 alert("Obrigado por utilizar nossos serviços! O programa será encerrado...")
@@ -43,6 +43,10 @@ function register(arr){
     console.log(arr)
 }
 function mdAge(arr){
+    if(arr.length == 0){
+        alert("Nenhum habitante cadastrado.")
+        return 0
+    }
     var total = 0
     var cont = 0
     for(var i = 0; i < arr.length; i++){
@@ -55,4 +59,50 @@ function mdAge(arr){
         alert(`A média das idades é de ${(total/cont).toFixed(2)}`)
     else
         alert("Não existem pessoas assim cadastradas!")
+}
+function olderAge(arr){
+    if(arr.length == 0){
+        alert("Nenhum habitante cadastrado.")
+        return 0
+    }
+    var old = arr[0].age
+    for(var i = 0; i < arr.length; i++){
+        if(arr[i].age > old){
+            old = arr[i].age
+        }
+    }
+    alert(`A maior idade encontrada foi ${old}`)
+}
+function item4(arr){
+    if(arr.length == 0){
+        alert("Nenhum habitante cadastrado.")
+        return 0
+    }
+    var cont = 0
+    for(var i = 0; i < arr.length; i++){
+        if((20 <= arr[i].age <= 45) && (arr[i].gen == "F") || (arr[i].eyes == "V") && (arr[i].h < 1.70))
+            cont++
+    }
+    if(cont > 0){
+        alert(`Quantidade total de pessoas do item 4: ${cont}`)
+    }else{
+        alert("Nenhuma pessoa se encaixa nos critérios do item 4.")
+    }
+}
+function percentMan(arr){
+    if(arr.length == 0){
+        alert("Nenhum habitante cadastrado.")
+        return 0
+    }
+    cont = 0
+    for(var i = 0; i < arr.length; i++){
+        if(arr[i].gen == "M"){
+            cont++
+        }
+    }
+    if(cont > 0){
+        alert(`Porcentagem de homens dentre os habitantes: ${((cont/ arr.length) * 100).toFixed(2)}`)
+    }else{
+        alert("Nenhum homem encontrado")
+    }
 }
